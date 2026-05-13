@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ten Cate's Oral Histology - Complete Cram Reviewer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .controls {
+            padding: 20px 30px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .controls input, .controls select {
+            padding: 10px 15px;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        
+        .controls button {
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.3s;
+        }
+        
+        .controls button:hover {
+            background: #764ba2;
+        }
+        
+        .content {
+            padding: 30px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .chapter {
+            margin-bottom: 40px;
+            border-left: 5px solid #667eea;
+            padding-left: 20px;
+            scroll-margin-top: 100px;
+        }
+        
+        .chapter h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .chapter h2 .toggle-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.8em;
+        }
+        
+        .chapter-content {
+            display: none;
+        }
+        
+        .chapter-content.show {
+            display: block;
+        }
+        
+        .section {
+            margin-bottom: 25px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .section h3 {
+            color: #764ba2;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+        
+        .key-point {
+            background: #fff3cd;
+            padding: 12px;
+            border-left: 4px solid #ffc107;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .definition {
+            background: #e7f3ff;
+            padding: 12px;
+            border-left: 4px solid #0066cc;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .clinical {
+            background: #fff0f5;
+            padding: 12px;
+            border-left: 4px solid #ff1493;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        ul, ol {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        strong {
+            color: #667eea;
+        }
+        
+        .quiz-box {
+            background: #f0f4ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border: 2px dashed #667eea;
+        }
+        
+        .quiz-box h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .quiz-question {
+            background: white;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .quiz-question p {
+            margin-bottom: 10px;
+        }
+        
+        .answer {
+            background: #e7f3ff;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .answer.show {
+            display: block;
+        }
+        
+        .show-answer-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        
+        .study-tips {
+            background: #d4edda;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+            margin: 20px 0;
+        }
+        
+        .study-tips strong {
+            color: #155724;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+            
+            .chapter {
+                padding-left: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Ten Cate's Oral Histology</h1>
+            <p>Complete Cram Reviewer - Development, Structure, and Function</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">9th Edition - Quick Reference Guide for Quiz Preparation</p>
+        </header>
+        
+        <div class="controls">
+            <button onclick="expandAll()">📖 Expand All Chapters</button>
+            <button onclick="collapseAll()">📕 Collapse All Chapters</button>
+            <input type="text" id="searchBox" placeholder="🔍 Search topics..." onkeyup="searchTopics()">
+        </div>
+        
+        <div class="content" id="mainContent">
+            <!-- Chapters will be loaded here via JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // Comprehensive Oral Histology Study Data
+        const cramData = {
+            chapters: [
+                {
+                    number: 1,
+                    title: "Structure of the Oral Tissues",
+                    sections: [
+                        {
+                            name: "The Tooth",
+                            content: `
+                                <div class="definition">
+                                    <strong>Tooth Definition:</strong> A hard tissue structure composed of enamel, dentin, cementum, pulp, and periodontal ligament
+                                </div>
+                                <h4>Components of the Tooth:</h4>
+                                <ul>
+                                    <li><strong>Enamel:</strong> Hardest tissue in human body, covers the crown, non-living acellular structure</li>
+                                    <li><strong>Dentin:</strong> Lives beneath enamel, contains microscopic tubules, sensitive to stimuli</li>
+                                    <li><strong>Cementum:</strong> Covers the root, similar to bone but lacks blood vessels</li>
+                                    <li><strong>Pulp:</strong> Contains blood vessels, nerves, connective tissue (VITAL)</li>
+                                </ul>
+                                <div class="key-point">
+                                    <strong>Key Point:</strong> Enamel cannot regenerate - once damaged, permanent loss occurs. Dentin and cementum have limited regenerative capacity.
+                                </div>
+                            `
+                        },
+                        {
+                            name: "Supporting Tissues",
+                            content: `
+                                <h4>Structures Supporting the Tooth:</h4>
+                                <ul>
+                                    <li><strong>Alveolar Bone:</strong> Surrounds tooth root, provides support and attachment</li>
+                                    <li><strong>Periodontal Ligament:</strong> Connects tooth to bone, absorbs shock during mastication</li>
+                                    <li><strong>Gingiva (Gums):</strong> Oral mucosa covering alveolar bone and tooth</li>
+                                </ul>
+                                <div class="clinical">
+                                    <strong>Clinical Significance:</strong> Periodontal disease affects supporting tissues and can lead to tooth loss. Early intervention is critical.
+                                </div>
+                            `
+                        },
+                        {
+                            name: "Oral Mucosa",
+                            content: `
+                                <div class="definition">
+                                    <strong>Oral Mucosa:</strong> Lining of oral cavity composed of epithelium, lamina propria, and sometimes submucosa
+                                </div>
+                                <h4>Types of Oral Mucosa:</h4>
+                                <ul>
+                                    <li><strong>Masticatory Mucosa:</strong> Hard palate and gingiva - keratinized, resistant to friction</li>
+                                    <li><strong>Lining Mucosa:</strong> Cheeks, lips, floor of mouth - non-keratinized, more elastic</li>
+                                    <li><strong>Specialized Mucosa:</strong> Dorsum of tongue - contains taste buds</li>
+                                </ul>
+                                <div class="key-point">
+                                    <strong>Important:</strong> Oral mucosa has high regenerative capacity with epithelial turnover every 3-7 days in some regions.
+                                </div>
+                            `
+                        }
+                    ]
+                },
+                {
+                    number: 2,
+                    title: "General Embryology",
+                    sections: [
+                        {
+                            name: "Germ Layers Formation",
+                            content: `
+                                <h4>Three Primary Germ Layers:</h4>
+                                <ul>
+                                    <li><strong>Ectoderm (outer):</strong> Develops into nervous system, epidermis, tooth enamel</li>
+                                    <li><strong>Mesoderm (middle):</strong> Forms connective tissue, bone, muscle, blood vessels</li>
+                                    <li><strong>Endoderm (inner):</strong> Lines digestive system, respiratory system, forms glands</li>
+                                </ul>
+                                <div class="key-point">
+                                    <strong>For Oral Tissues:</strong> Tooth enamel comes from ectoderm, while dentin, pulp, cementum, and bone come from mesoderm (neural crest cells)
+                                </div>
+                            `
+                        },
+                        {
+                            name: "Neural Crest Cells",
+                            content: `
+                                <div class="definition">
+                                    <strong>Neural Crest Cells:</strong> Special population of cells from ectoderm that migrate during development
+                                </div>
+                                <h4>Significance in Oral Development:</h4>
+                                <ul>
+                                    <li>Form most of the head skeleton</li>
+                                    <li>Generate odontoblasts (form dentin)</li>
+                                    <li>Create fibroblasts of periodontal ligament</li>
+                                    <li>Form cementoblasts and osteoblasts</li>
+                                </ul>
+                                <div class="key-point">
+                                    <strong>Critical:</strong> Neural crest cell migration occurs during weeks 4-6 of human development. Disruptions can cause craniofacial defects.
+                                </div>
+                            `
+                        }
+                    ]
+                },
+                {
+                    number: 3,
+                    title: "Embryology of Head, Face, and Oral Cavity",
+                    sections: [
+                        {
+                            name: "Branchial Arches",
+                            content: `
+                                <div class="definition">
+                                    <strong>Branchial Arches:</strong> Six embryonic structures that form the skeleton and muscles of head and neck
+                                </div>
+                                <h4>First Branchial Arch (Mandibular Arch):</h4>
+                                <ul>
+                                    <li>Forms mandible, maxilla, and associated structures</li>
+                                    <li>Meckel's cartilage is template for mandible</li>
+                                    <li>Gives rise to muscles of mastication</li>
+                                </ul>
+                                <div class="clinical">
+                                    <strong>Clinical Note:</strong> Disturbances in first arch development can cause micrognathia (small jaw) or other malocclusions.
+                                </div>
+                            `
+                        },
+                        {
+                            name: "Palate Formation",
+                            content: `
+                                <h4>Primary Palate (Hard Palate):</h4>
+                                <ul>
+                                    <li>Forms from medial nasal processes</li>
+                                    <li>Develops 6-7 weeks of gestation</li>
+                                    <li>Anterior 1/3 of hard palate</li>
+                                </ul>
+                                <h4>Secondary Palate (Soft Palate):</h4>
+                                <ul>
+                                    <li>Forms from palatal shelves</li>
+                                    <li>Develops 7-9 weeks of gestation</li>
+                                    <li>Posterior 2/3 of palate</li>
+                                </ul>
+                                <div class="clinical">
+                                    <strong>Common Defect:</strong> Cleft palate occurs when palatal shelves fail to fuse, affecting about 1 in 2500 births.
+                                </div>
+                            `
+                        },
+                        {
+                            name: "Tongue Development",
+                            content: `
+                                <h4>Development of the Tongue:</h4>
+                                <ul>
+                                    <li>Develops from 1st, 2nd, 3rd pharyngeal arches</li>
+                                    <li><strong>Anterior 2/3:</strong> From first arch (swallowing, taste)</li>
+                                    <li><strong>Posterior 1/3:</strong> From 2nd and 3rd arches (swallowing, phonation)</li>
+                                    <li>Taste buds appear ~12 weeks gestation</li>
+                                </ul>
+                                <div class="key-point">
+                                    <strong>Innervation Memory Aid:</strong> 
+                                    <ul>
+                                        <li>Anterior 2/3: Facial nerve (CN VII) for taste, Lingual nerve for touch</li>
+                                        <li>Posterior 1/3: Glossopharyngeal nerve (CN IX) for taste</li>
+                                    </ul>
+                                </div>
+                            `
+                        }
+                    ]
+                },
+                {
+                    number: 4,
+                    title: "Cell, Extracellular Matrix, and Neural Elements",
+                    sections: [
+                        {
+                            name: "Cell Membrane and Junctions",
+                            content: `
+                                <div class="definition">
+                                    <strong>Cell Membrane:</strong> Selectively permeable barrier composed of phospholipid bilayer with embedded proteins
+                                </div>
+                                <h4>Types of Cell Junctions:</h4>
+                                <ul>
+                                    <li><strong>Tight Junctions:</strong> Create seals between cells, prevent leakage</li>
+                                    <li><strong>Adherens Junctions:</strong> Provide strong cell-cell adhesion via cadherins</li>
+                                    <li><strong>Gap Junctions:</strong> Allow communication between adjacent cells</li>
+                                    <li><strong>Desmosomes:</strong> Provide mechanical strength, important in epithelium</li>
+                                </ul>
+                                <div class="key-point">
+                                    <strong>In Oral Tissues:</strong> Tight junctions in oral epithelium create protective barrier against pathogens and toxins.
+                                </div>
+                            `
+                        },
+                        {
+                            name: "Extracellular Matrix (ECM)",
+                            content: `
+                                <h4>Components of ECM:</h4>
+                                <ul>
+                                    <li><strong>Collagen Fibers:</strong> Type I (bone, dentin), Type III (loose connective tissue)</li>
+                                    <li><strong>Proteoglycans:</strong> Retain water, provide cushioning</li>
+                                    <li><strong>Glycoproteins:</strong> Fibronectin, laminin - cell adhesion</li>
+                                </ul>
+                                <div class="definition">
+                                    <strong>Periodontal Ligament ECM:</strong> Contains primarily Type I collagen with specialized fiber groups that support the tooth.
+                                </div>
+                            `
+                        },
+                        {
+                            name: "Fibroblasts",
+                            content: `
+                                <div class="definition">
+                                    <strong>Fibroblasts:</strong> Primary cells of connective tissue, responsible for ECM synthesis and remodeling
+                                </div>
+                                <h4>Functions:</h4>
+                                <ul>
+                                    <li>Synthesize collagen and proteoglycans</li>
+                                    <li>Remodel ECM through MMP secretion</li>
+                                    <li>Regulate inflammation through cytokine production</li>
+                                    <li>Respond to growth factors and hormones</li>
+                                </ul>
+                                <div class="key-point">
+                                    <strong>Clinical Importance:</strong> Fibroblasts in periodontal ligament are essential for tooth support and regeneration of periodontal tissues.
+                                </div>
+                            `
+                        }
+                    ]
+                },
+                {
+                    number: 5,
+                    title: "Development of Tooth and Supporting Tissues",
+                    sections: [
+                        {
+                            name: "Stages of Tooth Development",
+                            content: `
+                                <h4>Tooth Development Stages (in order):</h4>
+                                <ol>
+                                    <li><strong>Initiation Stage:</strong> Bud forms from epithelium (week 6-7)</li>
+                                    <li><strong>Bud Stage:</strong> Epithelial bud visible microscopically</li>
+                                    <li><strong>Cap Stage:</strong> Epithelium forms cap-like structure over ectomesenchyme</li>
+                                    <li><strong>Bell Stage:</strong> Enamel organ, stratum intermedium, inner enamel epithelium identifiable</li>
+                                    <li><strong>Apposition:</strong> Ameloblasts and odontoblasts form hard tissue layers</li>
+                                    <li><strong>Calcification:</strong> Mineral deposition begins</li>
+                                </ol>
+                                <div class="key-point">
+                                    <strong>Memory Aid - "BCAS":</strong> Bell > Cap transition > Apposition/Appositional growth > Secretory phase
+                                </div>
+                            `
+                        },
+                        {
+                            name: "Amelogenesis (Enamel Formation)",
+                            content: `
+                                <div class="definition">
+                                    <strong>Amelogenesis:</strong> Formation of enamel by ameloblasts derived from inner enamel epithelium
+                                </div>
+                                <h4>Two Phases:</h4>
+                                <ul>
+                                    <li><strong>Secretory Phase:</strong>
+                                        <ul>
+                                            <li>Ameloblasts secrete enamel matrix proteins (amelogenins, enamelin)</li>
+                                            <li>Matrix accumulates between ameloblast and newly formed dentin</li>
+                                            <li>Enamel thickness increases</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Maturation Phase:</strong>
+                                        <ul>
+                                            <li>Ameloblasts transport minerals into matrix</li>
+                                            <li>Matrix proteins are degraded</li>
+                                            <li>Enamel becomes hard and crystalline</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <div class="key-point">
+                                    <strong>Important:</strong> Ameloblasts are sacrificed during maturation - they are lost when enamel is complete. This is why enamel CANNOT regenerate.
+                                </div>
+                            `
+                        },
+                        {
+                            name: "Dentinogenesis (Dentin Formation)",
+                            content: `
+                                <h4>Process:</h4>
+                                <ul>
+                                    <li><strong>Induction:</strong> Inner enamel epithelium signals ectomesenchymal cells to become odontoblasts</li>
+                                    <li><strong>Differentiation:</strong> Cells become odontoblasts (tall, polarized cells)</li>
+                                    <li><strong>Secretion:</strong> Odontoblasts secrete predentin (organic matrix)</li>
+                                    <li><strong>Mineralization:</strong> Predentin mineralizes to become dentin</li>
+                                </ul>
+                                <div class="definition">
+                                    <strong>Odontoblast Process:</strong> Cytoplasmic extension of odontoblast that runs through dentin tubules - essential for dentin sensitivity and nutrition.
+                                </div>
+                            `
+                        },
+                        {
+                            name: "Root Formation",
+                            content: `
+                                <h4>After Crown Completion:</h4>
+                                <ul>
+                                    <li><strong>Hertwig's Epithelial Root Sheath (HERS):</strong> Inner and outer root epithelium remains after crown development</li>
+                                    <li><strong>Root Canal Formation:</strong> HERS outlines root canal anatomy</li>
+                                    <li><strong>Apical Foramen:</strong> Opening where blood vessels and nerves enter pulp</li>
+                                </ul>
+                                <div class="key-point">
+                                    <strong>Timeline:</strong> Root formation begins when crown is nearly complete and continues for several years after tooth eruption (varies by tooth type).
+                                </div>
+                            `
+                        }
+                    ]
+                },
+                {
+                    number: 6,
+                    title: "Bone",
+                    sections: [
+                        {
+                            name: "Bone Composition and Structure",
+                            content: `
+                                <h4>Bone Components:</h4>
+                                <ul>
+                                    <li><strong>Organic Matrix (35%):</strong> Primarily Type I collagen, provides flexibility</li>
+                                    <li><strong>Inorganic Matrix (65%):</strong> Hydroxyapatite [Ca10(PO4)6(OH)2], provides hardness</li>
+                                    <li><strong>Water (10%):</strong> Fills spaces in matrix</li>
+                                </ul>
+                                <h4>Microscopic Organization:</h4>
+                                <ul>
+                                    <li><strong>Compact Bone:</strong> Dense, organized, outer layer</li>
+                                    <li><strong>Cancellous Bone:</strong> Porous, spongy, inner layer with trabecular structure</li>
+                                </ul>
+                                <div class="key-point">
+                                    <strong>In Alveolar Bone:</strong> High remodeling rate (~20% annual turnover), important for orthodontic tooth movement.
+                                </div>
+                            `
+                        },
+                        {
+                            name: "Bone Cells",
+                            content: `
+                                <ul>
+                                    <li><strong>Osteoblasts:</strong> Bone-forming cells, secrete organic matrix and regulate mineralization</li>
+                                    <li><strong>Osteocytes:</strong> Mature bone cells in lacunae, maintain bone, respond to mechanical stress</li>
+                                    <li><strong>Osteoclasts:</strong> Multinucleated giant cells from hematopoietic lineage, resorb bone</li>
+                                </ul>
+                                <div class="clinical">
+                                    <strong>Clinical Significance:</strong> Balance between osteoblast and osteoclast activity determines bone remodeling. Periodontal disease tips balance toward resorption.
+                                </div>
+                            `
+                        }
+                    ]
+                },
+                {
+                    number: 7,
+                    title: "Enamel",
+                    sections: [
+                        {
+                            name: "Enamel Composition",
+                            content: `
+                                <h4>Chemical Composition:</h4>
+                                <ul>
+                                    <li><strong>96% Inorganic:</strong> Hydroxyapatite crystals (calcium phosphate)</li>
+                                    <li><strong>1% Organic:</strong> Proteins (some residual amelogenins)</li>
+                                    <li><strong>3% Water</strong></li>
+                                </ul>
+                                <div class="key-point">
+                                    <strong>Hardness:</strong> Enamel is the hardest tissue in the human body, with Knoop hardness number of 343 (compared to dentin at 63).
+                                </div>
+                                <div class="definition">
+                                    <strong>Hydroxyapatite:</strong> Primary crystal mineral that gives enamel its hardness and opacity.
+                                </div>
+                            `
+                        },
+                        {
+                            name: "Enamel Structure",
+                            content: `
+                                <h4>Microscopic Features:</h4>
+                                <ul>
+                                    <li><strong>Enamel Rods (Prisms):</strong> Parallel mineral crystal bundles running from DEJ to surface</li>
+                                    <li><strong>Rod Pattern:</strong> 
+                                        <ul>
+                                            <li>Cervical region: Rods run perpendicular to DEJ (cervical third)</li>
+                                            <li>Middle region: Rods run obliquely</li>
+                                            <li>Occlusal region: Rods run parallel to axis (occlusal third)</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Striae of Retzius:</strong> Incremental growth lines, seen as brown lines in longitudinal section</li>
+                                    <li><strong>Perikymata:</strong> Surface grooves corresponding to striae of Retzius</li>
+                                </ul>
+                                <div class="key-point">
+                                    <strong>DEJ (Dentinoenamel Junction):</strong> Scalloped interface where dentin and enamel meet - contributes to enamel retention.
+                                </div>
+                            `
+                        },
+                        {
+                            name: "Enamel Defects",
+                            content: `
+                                <h4>Developmental Defects:</h4>
+                                <ul>
+                                    <li><strong>Amelogenesis Imperfecta:</strong> Genetic defect causing defective enamel formation - hypoplastic or hypomineralized</li>
+                                    <li><strong>Enamel Hypoplasia:</strong> Pits, grooves, or missing enamel in smooth areas from systemic disturbance during amelogenesis</li>
+                                    <li><strong>Fluorosis:</strong> Excessive fluoride during enamel development causes discoloration and pitting</li>
+                                </ul>
+                                <div class="clinical">
+                                    <strong>Clinical Implications:</strong> Any systemic disturbance (fever, infection, trauma, nutritional deficiency) during amelogenesis can cause permanent enamel defects on affected teeth.
+                                </div>
+                            `
+                        }
+                    ]
+                },
+                {
+                    number: 8,
+                    title: "Dentin-Pulp Complex",
+                    sections: [
+                        {
+                            name: "Dentin Composition and Structure",
+                            content: `
+                                <h4>Dentin Composition:</h4>
+                                <ul>
+                                    <li><strong>70% Inorganic (hydroxyapatite):</strong> Less mineralized than enamel</li>
+                                    <li><strong>30% Organic:</strong> Type I collagen, proteoglycans, other proteins</li>
+                                </ul>
+                                <h4>Structural Features:</h4>
+                                <ul>
+                                    <li><strong>Dentin Tubules:</strong> Microscopic channels running from pulp to DEJ/CEJ
+                                        <ul>
+                                            <li>Contain odontoblast process</li>
+                                            <li>Contain tissue fluid</li>
+                                            <li>Diameter: 1-2 micrometers at pulp, 0.5 micrometer at DEJ</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Peritubular Dentin:</strong> Mineralized dentin surrounding tubules (more mineralized)</li>
+                                    <li><strong>Intertubular Dentin:</strong> Between tubules (less mineralized)</li>
+                                </ul>
+                                <div class="key-point">
+                                    <strong>Clinical Significance:</strong> Dentin tubules are pathways for caries progression and explain dentin sensitivity to stimuli.
+                                </div>
+                            `
+                        },
+                        {
+                            name: "Types of Dentin",
+                            content: `
+                                <ul>
+                                    <li><strong>Coronal Dentin:</strong> In the crown region</li>
+                                    <li><strong>Radicular (Root) Dentin:</strong> In the root region</li>
+                                    <li><strong>Primary Dentin:</strong> Forms before root completion</li>
+                                    <li><strong>Secondary Dentin:</strong> Continues to form throughout life at slower rate
+                                        <ul>
+                                            <li>Reduces pulp chamber size with age</li>
+                                            <li>Forms in response to aging or mild stimuli</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Tertiary Dentin:</strong> Forms rapidly in response to severe stimuli (caries, attrition, preparation)</li>
+                                </ul>
+                            `
+                        },
+                        {
+                            name: "The Pulp",
+                            content: `
+                                <div class="definition">
+                                    <strong>Pulp:</strong> Vital connective tissue inside tooth containing blood vessels, nerves, and cells
+                                </div>
+                                <h4>Pulp Components:</h4>
+                                <ul>
+                                    <li><strong>Odontoblasts:</strong> Line periphery, form dentin throughout life</li>
+                                    <li><strong>Fibroblasts:</strong> Main cell type, produce collagen and ECM</li>
+                                    <li><strong>Blood Vessels:</strong> Provide nutrients and oxygen</li>
+                                    <li><strong>Nerves:</strong> Sensory (A-delta and C fibers) and autonomic</li>
+                                    <li><strong>Immune Cells:</strong> Macrophages, lymphocytes for defense</li>
+                                </ul>
+                                <div class="key-point">
+                                    <strong>Pulp Innervation:</strong> Primarily sensory - feels pain, temperature, pressure. No distinction between pain types in pulp (all stimuli feel like pain).
+                                </div>
+                            `
+                        },
+                        {
+                            name: "Dentin Sensitivity",
+                            content: `
+                                <div class="definition">
+                                    <strong>Dentin Sensitivity:</strong> Short, sharp pain from exposed dentin when subjected to stimuli
+                                </div>
+                                <h4>Hydrodynamic Theory (most accepted):</h4>
+                                <ul>
+                                    <li>Stimulus (thermal, osmotic, mechanical) causes fluid movement in tubules</li>
+                                    <li>Fluid movement stimulates odontoblast process</li>
+                                    <li>Nerve endings near pulp are stimulated</li>
+                                    <li>Sharp pain is perceived</li>
+                                </ul>
+                                <div class="clinical">
+                                    <strong>Clinical Management:</strong> 
+                                    <ul>
+                                        <li>Desensitizing pastes (potassium nitrate, arginine)</li>
+                                        <li>Fluoride varnish to occlude tubules</li>
+                                        <li>Gum graft if gingival recession</li>
+                                    </ul>
+                                </div>
+                            `
+                        }
+                    ]
+                },
+                {
+                    number: 9,
+                    title: "Periodontium",
+                    sections: [
+                        {
+                            name: "Cementum",
+                            content: `
+                                <div class="definition">
+                                    <strong>Cementum:</strong> Bone-like tissue covering root surface, connects to periodontal ligament
+                                </div>
+                                <h4>Characteristics:</h4>
+                                <ul>
+                                    <li>Slightly softer than bone and dentin</li>
+                                    <li>No blood vessels or nerves (avascular, aneural)</li>
+                                    <li>Contains cementocytes in lacunae (like osteocytes)</li>
+                                    <li>Continuous formation throughout life (unlike enamel)</li>
+                                </ul>
+                                <h4>Types of Cementum:</h4>
+                                <ul>
+                                    <li><strong>Acellular Cementum:</strong> Apical/cervical root, no cementocytes</li>
+                                    <li><strong>Cellular Cementum:</strong> Apical region, contains cementocytes</li>
+                                    <li><strong>Cementoid:</strong> Uncalcified cementum matrix</li>
+                                </ul>
+                                <div class="key-point">
+                                    <strong>Clinical Importance:</strong> Cementum can regenerate unlike enamel, making periodontal regeneration possible.
+                                </div>
+                            `
+                        },
+                        {
+                            name: "Alveolar Bone",
+                            content: `
+                                <h4>Structure:</h4>
+                                <ul>
+                                    <li><strong>Lamina Dura:</strong> Radiopaque line on X-ray representing alveolar bone proper</li>
+                                    <li><strong>Cribriform Plate:</strong> Perforated portion of alveolar bone proper with vessel openings</li>
+                                    <li><strong>Supporting Bone:</strong> Surrounds alveolar bone</li>
+                                </ul>
+                                <h4>Height and Health:</h4>
+                                <ul>
+                                    <li>Normal bone level in healthy periodontium is 1-2mm apical to CEJ</li>
+                                    <li>Periodontal disease causes bone loss</li>
+                                    <li>Bone remodels in response to mechanical forces (orthodontics)</li>
+                                </ul>
+                                <div class="clinical">
+                                    <strong>Radiographic Assessment:</strong> Lamina dura integrity and alveolar bone height are key indicators of periodontal health.
+                                </div>
+                            `
+                        },
+                        {
+                            name: "Periodontal Ligament (PDL)",
+                            content: `
+                                <div class="definition">
+                                    <strong>PDL:</strong> Specialized connective tissue between cementum and alveolar bone, suspends tooth in socket
+                                </div>
+                                <h4>Functions:</h4>
+                                <ul>
+                                    <li><strong>Mechanical:</strong> Transmits forces from tooth to bone, absorbs shock during mastication</li>
+                                    <li><strong>Sensory:</strong> Proprioceptive feedback for biting force</li>
+                                    <li><strong>Nutritional:</strong> Blood vessels supply cementum and bone</li>
+                                    <li><strong>Protective:</strong> Immune cells and inflammatory mediators</li>
+                                    <li><strong>Regenerative:</strong> Contains stem cells and progenitor cells</li>
+                                </ul>
+                                <h4>Fiber Groups (major ones):</h4>
+                                <ul>
+                                    <li><strong>Alveolar Crest Fibers:</strong> From alveolar crest to cervical cementum</li>
+                                    <li><strong>Horizontal Fibers:</strong> Run perpendicular from cementum to bone</li>
+                                    <li><strong>Oblique Fibers:</strong> Run from apical bone at angle to cervical cementum (primary suspending fibers)</li>
+                                    <li><strong>Apical Fibers:</strong> Radiate around apex</li>
+                                </ul>
+                                <div class="key-point">
+                                    <strong>Width:</strong> Normal PDL space is 0.15-0.38mm on X-ray. Changes in width can indicate disease or trauma.
+                                </div>
+                            `
+                        }
+                    ]
+                },
+                {
+                    number: 10,
+                    title: "Physiologic Tooth Movement",
+                    sections: [
+                        {
+                            name: "Types of Tooth Movement",
+                            content: `
+                                <h4>Before Eruption (Preeruptive):</h4>
+                                <ul>
+                                    <li>Tooth moves occlusally/incisal as crown develops</li>
+                                    <li>Accommodates growth of jaw</li>
+                                    <li>Moves laterally in some cases</li>
+                                </ul>
+                                <h4>During Eruption (Eruptive):</h4>
+                                <ul>
+                                    <li>Tooth moves from bony crypt into oral cavity</li>
+                                    <li>Rate: ~1mm/month for incisors</li>
+                                    <li>Driven by root elongation and PDL remodeling</li>
+                                </ul>
+                                <h4>After Eruption (Posteruptive):</h4>
+                                <ul>
+                                    <li>Continued occlusal movement to compensate for wear</li>
+                                    <li>Rate decreases with age</li>
+                                    <li>Prevents excessive wear</li>
+                                </ul>
+                                <div class="key-point">
+                                    <strong>Continuous Process:</strong> Teeth move throughout life in response to attrition, migration, and bone remodeling.
+                                </div>
+                            `
+                        }
+                    ]
+                },
+                {
+                    number: 11,
+                    title: "Salivary Glands",
+                    sections: [
+                        {
+                            name: "Major Salivary Glands",
+                            content: `
+                                <h4>Three Major Pairs:</h4>
+                                <ul>
+                                    <li><strong>Parotid Glands (25% of saliva):</strong>
+                                        <ul>
+                                            <li>Largest salivary glands</li>
+                                            <li>Serous secretion (watery, enzyme-rich)</li>
+                                            <li>Duct opens opposite upper second molar (Stensen's duct)</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Submandibular Glands (70% of saliva):</strong>
+                                        <ul>
+                                            <li>Mixed serous and mucous secretion</li>
+                                            <li>Produces thicker, viscous saliva</li>
+                                            <li>Duct opens under tongue (Wharton's duct)</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Sublingual Glands (5% of saliva):</strong>
+                                        <ul>
+                                            <li>Primarily mucous secretion</li>
+                                            <li>Multiple ducts open into floor of mouth</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            `
+                        },
+                        {
+                            name: "Saliva Functions and Composition",
+                            content: `
+                                <h4>Major Functions:</h4>
+                                <ul>
+                                    <li><strong>Lubrication:</strong> Facilitates chewing and swallowing</li>
+                                    <li><strong>Digestion:</strong> Amylase enzyme begins starch breakdown</li>
+                                    <li><strong>Protection:</strong> Antibacterial proteins (lysozyme, lactoferrin, IgA), buffering capacity (pH 6.2-7.4)</li>
+                                    <li><strong>Oral Health:</strong> Remineralization through calcium and phosphate</li>
+                                    <li><strong>Taste:</strong> Dissolves food chemicals for taste receptors</li>
+                                </ul>
+                                <h4>Daily Secretion:</h4>
+                                <ul>
+                                    <li>Average: 0.5-1.5 liters per day</li>
+                                    <li>Increases during eating and stress</li>
+                                    <li>Decreases during sleep</li>
+                                </ul>
+                            `
+                        }
+                    ]
+                },
+                {
+                    number: 12,
+                    title: "Oral Mucosa",
+                    sections: [
+                        {
+                            name: "Oral Epithelium",
+                            content: `
+                                <h4>Structure:</h4>
+                                <ul>
+                                    <li><strong>Stratified Squamous Epithelium:</strong> Multiple cell layers</li>
+                                    <li><strong>Basal Layer:</strong> Cuboidal cells attached to lamina propria by hemidesmosomes</li>
+                                    <li><strong>Intermediate Layers:</strong> Polyhedral cells with increased keratin</li>
+                                    <li><strong>Surface Layer (Stratum Corneum/Keratin):</strong> Flattened, dead cells (keratinized or non-keratinized)</li>
+                                </ul>
+                                <h4>Keratinization:</h4>
+                                <ul>
+                                    <li><strong>Keratinized Mucosa:</strong> Hard palate and gingiva - tough, resistant to friction</li>
+                                    <li><strong>Non-keratinized Mucosa:</strong> Cheeks, lips, floor of mouth - more elastic, can stretch</li>
+                                </ul>
+                                <div class="key-point">
+                                    <strong>Cell Turnover:</strong> Epithelial cells replace completely every 3-7 days - one of fastest turnover rates in body.
+                                </div>
+                            `
+                        },
+                        {
+                            name: "Lamina Propria",
+                            content: `
+                                <div class="definition">
+                                    <strong>Lamina Propria:</strong> Connective tissue layer beneath epithelium
+                                </div>
+                                <h4>Features:</h4>
+                                <ul>
+                                    <li>Contains Type I and III collagen fibers</li>
+                                    <li>Rich blood vessel and nerve supply</li>
+                                    <li>Contains minor salivary glands in some regions</li>
+                                    <li>Provides support and nutrition to epithelium</li>
+                                </ul>
+                                <h4>Epithelial-Connective Tissue Interface:</h4>
+                                <ul>
+                                    <li>Basement membrane zone provides attachment</li>
+                                    <li>Creates microscopic projections (rete ridges)</li>
+                                    <li>Increases surface area for nutrient exchange</li>
+                                </ul>
+                            `
+                        }
+                    ]
+                },
+                {
+                    number: 13,
+                    title: "Mastication Apparatus",
+                    sections: [
+                        {
+                            name: "Temporomandibular Joint (TMJ)",
+                            content: `
+                                <div class="definition">
+                                    <strong>TMJ:</strong> Articulation between mandible and temporal bone, allows jaw movement
+                                </div>
+                                <h4>Structure:</h4>
+                                <ul>
+                                    <li><strong>Articular Surfaces:</strong> Condylar head of mandible and articular fossa/eminence of temporal bone</li>
+                                    <li><strong>Fibrocartilage Disk:</strong> Divides joint into superior and inferior compartments</li>
+                                    <li><strong>Joint Capsule:</strong> Surrounds entire joint, contains synovial fluid</li>
+                                    <li><strong>Ligaments:</strong> Temporomandibular, sphenomandibular, stylomandibular provide stability</li>
+                                </ul>
+                                <div class="key-point">
+                                    <strong>Movement:</strong> Superior compartment - disk-condyle translation (sliding). Inferior compartment - rotation of condyle on disk.
+                                </div>
+                            `
+                        },
+                        {
+                            name: "Muscles of Mastication",
+                            content: `
+                                <h4>Innervation: All from CN V3 (Trigeminal)</h4>
+                                <ul>
+                                    <li><strong>Masseter:</strong> Elevates mandible (closes jaw)</li>
+                                    <li><strong>Temporalis:</strong> Elevates and retracts mandible</li>
+                                    <li><strong>Medial Pterygoid:</strong> Elevates mandible</li>
+                                    <li><strong>Lateral Pterygoid:</strong> 
+                                        <ul>
+                                            <li>Superior fibers: Retracts mandible</li>
+                                            <li>Inferior fibers: Protrudes mandible</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <div class="key-point">
+                                    <strong>Elevator vs. Depressor Muscles:</strong>
+                                    <ul>
+                                        <li>Elevators: More powerful (crushing force)</li>
+                                        <li>Depressors: Gravity, mylohyoid, anterior belly of digastric</li>
+                                    </ul>
+                                </div>
+                            `
+                        }
+                    ]
+                },
+                {
+                    number: 14,
+                    title: "Facial Growth and Development",
+                    sections: [
+                        {
+                            name: "Growth Patterns and Facial Types",
+                            content: `
+                                <h4>Types of Growth:</h4>
+                                <ul>
+                                    <li><strong>Vertical Growth (Dolichofacial):</strong> Long face, increased anterior vertical dimension</li>
+                                    <li><strong>Horizontal Growth (Brachyfacial):</strong> Short face, decreased vertical dimension</li>
+                                </ul>
+                                <h4>Facial Profiles:</h4>
+                                <ul>
+                                    <li><strong>Mesognathic (Normal):</strong> Balanced profile</li>
+                                    <li><strong>Prognathic:</strong> Mandible projects forward</li>
+                                    <li><strong>Retrognathic:</strong> Mandible is retracted</li>
+                                </ul>
+                                <div class="key-point">
+                                    <strong>Critical Growth Period:</strong> Most facial growth occurs before age 18. Males continue growing until early 20s, females until mid-teens.
+                                </div>
+                            `
+                        }
+                    ]
+                },
+                {
+                    number: 15,
+                    title: "Repair and Regeneration",
+                    sections: [
+                        {
+                            name: "Wound Healing in Oral Mucosa",
+                            content: `
+                                <h4>Phases (4):</h4>
+                                <ol>
+                                    <li><strong>Hemostasis (0-30 min):</strong> Blood clot forms, platelet aggregation</li>
+                                    <li><strong>Inflammation (30 min - 3 days):</strong>
+                                        <ul>
+                                            <li>Neutrophils remove debris</li>
+                                            <li>Macrophages arrive for cleanup and growth factor production</li>
+                                            <li>Increased blood flow causes redness and swelling</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Proliferation (3 - 21 days):</strong>
+                                        <ul>
+                                            <li>Fibroblasts produce new collagen</li>
+                                            <li>Angiogenesis (new blood vessels form)</li>
+                                            <li>Epithelium re-epithelializes</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Remodeling (weeks to years):</strong>
+                                        <ul>
+                                            <li>Collagen organization improves</li>
+                                            <li>Scar tissue matures</li>
+                                            <li>Strength increases</li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                                <div class="key-point">
+                                    <strong>Oral Advantage:</strong> Oral mucosa heals faster than skin due to increased blood supply, saliva (antimicrobial), and moist environment.
+                                </div>
+                            `
+                        },
+                        {
+                            name: "Dental Caries Pathology",
+                            content: `
+                                <h4>Three Factors Required:</h4>
+                                <ol>
+                                    <li><strong>Susceptible Host/Tooth:</strong> Enamel defects, composition</li>
+                                    <li><strong>Cariogenic Bacteria:</strong> Streptococcus mutans primarily (acid producers)</li>
+                                    <li><strong>Dietary Substrate:</strong> Fermentable carbohydrates (especially sucrose)</li>
+                                </ol>
+                                <h4>Progression:</h4>
+                                <ul>
+                                    <li>Bacterial acid demineralizes enamel (pH < 5.5)</li>
+                                    <li>Creates micro-cavity</li>
+                                    <li>Reaches DEJ - spreads laterally in dentin (faster than enamel)</li>
+                                    <li>Follows dentinal tubules toward pulp</li>
+                                </ul>
+                                <div class="clinical">
+                                    <strong>Prevention (4 Factors):</strong> Reduce bacteria (hygiene, chlorhexidine), reduce substrate (limit sugars, frequency), increase host resistance (fluoride, sealants), increase saliva quality/quantity.
+                                </div>
+                            `
+                        },
+                        {
+                            name: "Periodontal Disease Mechanisms",
+                            content: `
+                                <h4>Gingivitis → Periodontitis Progression:</h4>
+                                <ul>
+                                    <li><strong>Stage 1 - Gingivitis:</strong>
+                                        <ul>
+                                            <li>Biofilm accumulation on teeth</li>
+                                            <li>Bacterial endotoxins trigger inflammation</li>
+                                            <li>Reversible if biofilm removed</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Stage 2 - Early Periodontitis:</strong>
+                                        <ul>
+                                            <li>Inflammation spreads to lamina propria and alveolar bone</li>
+                                            <li>Collagen destruction by matrix metalloproteinases</li>
+                                            <li>Alveolar bone resorption begins</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Stage 3 - Moderate Periodontitis:</strong>
+                                        <ul>
+                                            <li>25-50% bone loss</li>
+                                            <li>Pocket formation (>3mm)</li>
+                                            <li>Tooth mobility may occur</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Stage 4 - Severe Periodontitis:</strong>
+                                        <ul>
+                                            <li>>50% bone loss</li>
+                                            <li>Deep pockets</li>
+                                            <li>Tooth loss if untreated</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <div class="key-point">
+                                    <strong>Host Response:</strong> Disease progression depends on immune response balance - protective immunity vs. destructive inflammation.
+                                </div>
+                            `
+                        }
+                    ]
+                }
+            ]
+        };
+
+        // Load all chapters
+        function loadChapters() {
+            const mainContent = document.getElementById('mainContent');
+            mainContent.innerHTML = '';
+            
+            cramData.chapters.forEach(chapter => {
+                const chapterDiv = document.createElement('div');
+                chapterDiv.className = 'chapter';
+                chapterDiv.id = `chapter-${chapter.number}`;
+                
+                let contentHtml = `
+                    <h2>
+                        Chapter ${chapter.number}: ${chapter.title}
+                        <button class="toggle-btn" onclick="toggleChapter(${chapter.number})">Expand</button>
+                    </h2>
+                    <div class="chapter-content" id="content-${chapter.number}">
+                `;
+                
+                chapter.sections.forEach(section => {
+                    contentHtml += `
+                        <div class="section">
+                            <h3>${section.name}</h3>
+                            ${section.content}
+                        </div>
+                    `;
+                });
+                
+                contentHtml += '</div>';
+                chapterDiv.innerHTML = contentHtml;
+                mainContent.appendChild(chapterDiv);
+            });
+            
+            // Add quiz section at the end
+            addQuizSection();
+        }
+
+        function toggleChapter(chapterNum) {
+            const content = document.getElementById(`content-${chapterNum}`);
+            const btn = event.target;
+            
+            if (content.classList.contains('show')) {
+                content.classList.remove('show');
+                btn.textContent = 'Expand';
+            } else {
+                content.classList.add('show');
+                btn.textContent = 'Collapse';
+            }
+        }
+
+        function expandAll() {
+            cramData.chapters.forEach(chapter => {
+                const content = document.getElementById(`content-${chapter.number}`);
+                content.classList.add('show');
+            });
+            document.querySelectorAll('.toggle-btn').forEach(btn => {
+                btn.textContent = 'Collapse';
+            });
+        }
+
+        function collapseAll() {
+            cramData.chapters.forEach(chapter => {
+                const content = document.getElementById(`content-${chapter.number}`);
+                content.classList.remove('show');
+            });
+            document.querySelectorAll('.toggle-btn').forEach(btn => {
+                btn.textContent = 'Expand';
+            });
+        }
+
+        function searchTopics() {
+            const searchTerm = document.getElementById('searchBox').value.toLowerCase();
+            const chapters = document.querySelectorAll('.chapter');
+            
+            if (searchTerm === '') {
+                chapters.forEach(ch => ch.style.display = 'block');
+                return;
+            }
+            
+            chapters.forEach(chapter => {
+                const text = chapter.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    chapter.style.display = 'block';
+                    chapter.querySelector('.chapter-content').classList.add('show');
+                } else {
+                    chapter.style.display = 'none';
+                }
+            });
+        }
+
+        function addQuizSection() {
+            const mainContent = document.getElementById('mainContent');
+            const quizSection = document.createElement('div');
+            quizSection.className = 'quiz-box';
+            quizSection.innerHTML = `
+                <h3>📝 Quiz Questions - Test Your Knowledge!</h3>
+                <div class="quiz-question">
+                    <p><strong>Q1: What is the hardest tissue in the human body?</strong></p>
+                    <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
+                    <div class="answer">
+                        <p><strong>Answer:</strong> Enamel. It contains 96% inorganic hydroxyapatite crystals, giving it exceptional hardness with a Knoop hardness number of 343.</p>
+                    </div>
+                </div>
+                
+                <div class="quiz-question">
+                    <p><strong>Q2: Why can't enamel regenerate?</strong></p>
+                    <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
+                    <div class="answer">
+                        <p><strong>Answer:</strong> Ameloblasts (enamel-forming cells) are sacrificed during enamel maturation and are completely lost when enamel formation is complete. Without these cells, new enamel cannot be produced.</p>
+                    </div>
+                </div>
+                
+                <div class="quiz-question">
+                    <p><strong>Q3: What are the three components of caries development?</strong></p>
+                    <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
+                    <div class="answer">
+                        <p><strong>Answer:</strong> 
+                        <ol>
+                            <li>Susceptible host/tooth (enamel composition, defects)</li>
+                            <li>Cariogenic bacteria (Streptococcus mutans)</li>
+                            <li>Dietary substrate (fermentable carbohydrates, especially sucrose)</li>
+                        </ol>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="quiz-question">
+                    <p><strong>Q4: Which salivary gland produces the most saliva?</strong></p>
+                    <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
+                    <div class="answer">
+                        <p><strong>Answer:</strong> Submandibular glands produce about 70% of total saliva. Although parotid glands are larger, submandibular glands secrete more saliva overall.</p>
+                    </div>
+                </div>
+                
+                <div class="quiz-question">
+                    <p><strong>Q5: What is the dentinoenamel junction (DEJ)?</strong></p>
+                    <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
+                    <div class="answer">
+                        <p><strong>Answer:</strong> The scalloped interface where dentin and enamel meet. The scalloped pattern contributes to mechanical retention of enamel on dentin and is an important boundary in tooth histology.</p>
+                    </div>
+                </div>
+                
+                <div class="quiz-question">
+                    <p><strong>Q6: Describe the "hydrodynamic theory" of dentin sensitivity.</strong></p>
+                    <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
+                    <div class="answer">
+                        <p><strong>Answer:</strong> 
+                        <ol>
+                            <li>A stimulus (thermal, osmotic, mechanical) causes fluid movement in dentin tubules</li>
+                            <li>This fluid movement stimulates the odontoblast process</li>
+                            <li>Nerve endings near the pulp are triggered</li>
+                            <li>Sharp pain is perceived</li>
+                        </ol>
+                        This is the most accepted explanation for why exposed dentin is sensitive.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="study-tips">
+                    <strong>💡 Study Tips for Your Quiz:</strong>
+                    <ul>
+                        <li>Memorize the major tissue compositions (% of minerals vs. organic)</li>
+                        <li>Understand the structural hierarchy: cells → tissues → organs</li>
+                        <li>Know the timeline of tooth development stages (Bud→Cap→Bell)</li>
+                        <li>Be familiar with the four stages of wound healing</li>
+                        <li>Understand the progression from gingivitis to severe periodontitis</li>
+                        <li>Know the functions of each salivary component</li>
+                        <li>Draw and label the tooth anatomy - visual learning helps!</li>
+                    </ul>
+                </div>
+            `;
+            mainContent.appendChild(quizSection);
+        }
+
+        function toggleAnswer(button) {
+            const answer = button.nextElementSibling;
+            answer.classList.toggle('show');
+            button.textContent = answer.classList.contains('show') ? 'Hide Answer' : 'Show Answer';
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', loadChapters);
+    </script>
+</body>
+</html>
